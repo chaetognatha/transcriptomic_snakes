@@ -2,9 +2,9 @@
 demo of a snakemake pipeline
 
 ## Setup conda:
-[https://docs.conda.io/en/latest/miniconda.html]
+https://docs.conda.io/en/latest/miniconda.html
 ## Setup snakemake:
-[https://snakemake.readthedocs.io/en/stable/getting_started/installation.html]
+https://snakemake.readthedocs.io/en/stable/getting_started/installation.html
 
 
 Clone this git, make sure you have snakemake available in your $PATH and run:
