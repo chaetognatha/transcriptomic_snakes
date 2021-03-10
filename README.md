@@ -22,7 +22,7 @@ and then:
 ```
 snakemake --cores 8 --use-conda
 ```
-This pipeline requires that you are in a linux environment with conda set up, no other requirements. 
+This pipeline requires that you are in a linux environment with conda and snakemake set up, no other requirements. 
 
 All results are found in the 5_Results/ directory after running
 the pipeline.
