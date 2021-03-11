@@ -34,7 +34,7 @@ rule trimming:
 
 rule map_reference:
 	output:
-		"4_Mapped/genome.8.ht2"
+		dynamic("4_Mapped/genome.{id}.ht2")
 	conda:
 		"envs/mapping.yaml"
 	shell:
@@ -43,7 +43,7 @@ rule map_reference:
 rule mapping:
 	input:
 		'3_Trimmed/{sample}_clean.fastq',
-		"4_Mapped/genome.8.ht2"
+		dynamic("4_Mapped/genome.{id}.ht2")
 	output:
 		'4_Mapped/{sample}.sam'
 	conda:
@@ -94,4 +94,4 @@ rule get_plots:
 	log:
 		"logs/make_plots.log"
 	shell:
-		'Rscript make_plots.R 2> {log}'
+		'Rscript make_plots.R &> {log}'
