@@ -3,4 +3,4 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - r-base
+  - r-base=4.0.3 

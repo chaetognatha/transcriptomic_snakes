@@ -4,6 +4,6 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - fastqc=0.11.9=0
-  - trimmomatic=0.39=1
+  - fastqc=0.11.9
+  - trimmomatic=0.39
 

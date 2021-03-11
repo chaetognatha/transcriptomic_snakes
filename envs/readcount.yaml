@@ -4,6 +4,6 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - htseq=0.13.5=py37h0498b6d_0
+  - htseq=0.13.5
 
 
