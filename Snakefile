@@ -20,7 +20,7 @@ rule qc:
 	conda:
 		"envs/quality.yaml"
 	container:
-		"library://chaetognatha/default/qc:latest"
+		"shub://chaetognatha/singularity_library:qc"
 	shell:
 		'fastqc -o "2_Quality/" {input} '
 
@@ -32,7 +32,7 @@ rule trimming:
 	conda:
 		"envs/quality.yaml"
 	container:
-		"library://chaetognatha/default/qc:latest"
+		"shub://chaetognatha/singularity_library:qc"
 	shell:
 		'trimmomatic SE {input} {output} AVGQUAL:28 MINLEN:46 CROP:46 SLIDINGWINDOW:8:20'
 
@@ -42,7 +42,7 @@ rule map_reference:
 	conda:
 		"envs/mapping.yaml"
 	container:
-		"library://chaetognatha/default/mapping:latest"
+		"shub://chaetognatha/singularity_library:mapping"
 	shell:
 		'hisat2-build {ref_genome} "4_Mapped/genome" '
 
@@ -55,7 +55,7 @@ rule mapping:
 	conda:
 		"envs/mapping.yaml"
 	container:
-		"library://chaetognatha/default/mapping:latest"
+		"shub://chaetognatha/singularity_library:mapping"
 	shell:
 		'hisat2 -p 8 --max-intronlen 5000 -U {input[0]} -x "4_Mapped/genome" \
 		-S {output} --summary-file {output}.summary'
@@ -68,7 +68,7 @@ rule count:
 	conda:
 		"envs/readcount.yaml"
 	container:
-		"library://chaetognatha/default/count:latest"
+		"shub://chaetognatha/singularity_library:count"
 	shell:
 		'htseq-count -s no -t CDS -i name -m intersection-nonempty {input} '
 		f"{gff_file} "
@@ -102,7 +102,7 @@ rule get_plots:
 	conda:
 		"envs/renv.yaml"
 	container:
-		"library://chaetognatha/default/renv:latest"
+		"shub://chaetognatha/singularity_library:renv"
 	log:
 		"logs/make_plots.log"
 	shell:
