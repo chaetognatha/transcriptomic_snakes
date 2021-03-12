@@ -19,6 +19,8 @@ rule qc:
 		'2_Quality/{sample}_fastqc.html'
 	conda:
 		"envs/quality.yaml"
+	container:
+		"library://chaetognatha/default/qc#"
 	shell:
 		'fastqc -o "2_Quality/" {input} '
 
@@ -29,6 +31,8 @@ rule trimming:
 		'3_Trimmed/{sample}_clean.fastq'
 	conda:
 		"envs/quality.yaml"
+	container:
+		"library://chaetognatha/default/qc#"
 	shell:
 		'trimmomatic SE {input} {output} AVGQUAL:28 MINLEN:46 CROP:46 SLIDINGWINDOW:8:20'
 
@@ -37,6 +41,8 @@ rule map_reference:
 		dynamic("4_Mapped/genome.{id}.ht2")
 	conda:
 		"envs/mapping.yaml"
+	container:
+		"library://chaetognatha/default/mapping#"
 	shell:
 		'hisat2-build {ref_genome} "4_Mapped/genome" '
 
@@ -48,6 +54,8 @@ rule mapping:
 		'4_Mapped/{sample}.sam'
 	conda:
 		"envs/mapping.yaml"
+	container:
+		"library://chaetognatha/default/mapping#"
 	shell:
 		'hisat2 -p 8 --max-intronlen 5000 -U {input[0]} -x "4_Mapped/genome" \
 		-S {output} --summary-file {output}.summary'
@@ -59,6 +67,8 @@ rule count:
 		'4_Mapped/{sample}.count'
 	conda:
 		"envs/readcount.yaml"
+	container:
+		"library://chaetognatha/default/count#"
 	shell:
 		'htseq-count -s no -t CDS -i name -m intersection-nonempty {input} '
 		f"{gff_file} "
@@ -91,6 +101,8 @@ rule get_plots:
 		"5_Results/fig4.heatmap_sig_diff_exp.pdf"
 	conda:
 		"envs/renv.yaml"
+	container:
+		"library://chaetognatha/default/renv#"
 	log:
 		"logs/make_plots.log"
 	shell:
