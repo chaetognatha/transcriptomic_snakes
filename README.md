@@ -34,7 +34,7 @@ up the environments and just using the frozen environments in the images. This c
 the R-environment, which takes a long time on first run, when it is setting up the R + DESeq2 environment. So if you have singularity,
 here's a quick guide:
 
-### 1 Change settings in conf/config.yaml
+### 1: Change settings in conf/config.yaml
 ```
 make_plots: "make_plots.R"
 ```
@@ -43,7 +43,7 @@ Needs to be changed to:
 make_plots: "singularity_make_plots.R"
 ```
 In the config.yaml that sits in the conf/ directory.
-### 2 Run snakemake with use singularity
+### 2: Run snakemake with use singularity
 ```
 snakemake --cores 8 --use-singularity
 ```
@@ -54,7 +54,7 @@ You find a file with different settings in conf/config.yaml, here you can specif
 and change trimmomatic settings depending on what you find in qc. It is recommended that when you run this pipeline the first time
 on your own dataset you start by specifying:
 ```
-snakemake -R qc --cores 8 --use-conda
+snakemake -U qc --cores 8 --use-conda
 ```
 this command only produces FastQC reports for your reads, have a look at them and the default settings in the conf.yaml file to adjust appropriately.
 
