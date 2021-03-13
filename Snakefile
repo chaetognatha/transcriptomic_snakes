@@ -1,7 +1,9 @@
+configfile: "conf/config.yaml"
 SAMPLE, = glob_wildcards('1_Reads/{sample}.fastq')
-ref_genome = "1_Reads/genome.fna"
-gff_file = "1_Reads/genes.gff"
-#need to require at least 1 genome.X.ht2
+ref_genome = config["ref_genome"]
+gff_file = config["gff_file"]
+
+
 rule all:
 	input:
 		expand('4_Mapped/{sample}.count', sample = SAMPLE),
@@ -34,7 +36,7 @@ rule trimming:
 	container:
 		"library://chaetognatha/default/qc:latest"
 	shell:
-		'trimmomatic SE {input} {output} AVGQUAL:28 MINLEN:46 CROP:46 SLIDINGWINDOW:8:20'
+		'trimmomatic SE {input} {output} {config[AVGQUAL]} {config[MINLEN]} {config[CROP]} {config[SLIDINGWINDOW]} '
 
 rule map_reference:
 	output:
@@ -106,4 +108,4 @@ rule get_plots:
 	log:
 		"logs/make_plots.log"
 	shell:
-		'Rscript make_plots.R &> {log}'
+		'Rscript {config[make_plots]} &> {log}'

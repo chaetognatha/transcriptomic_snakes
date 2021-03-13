@@ -1,0 +1,14 @@
+# Usage: change values on the right hand side to alter the settings
+# Reference genome
+ref_genome: "1_Reads/genome.fna"
+gff_file: "1_Reads/genes.gff"
+# Trimmomatic settings
+# warning: setting these to empty strings may cause issues!
+# except if they are all empty strings, refer to trimmomatic documentation
+AVGQUAL: "AVGQUAL:28"
+MINLEN: "MINLEN:46"
+CROP: "CROP:46"
+SLIDINGWINDOW: "SLIDINGWINDOW:8:20"
+# Important: Singularity users need to change this
+make_plots: "make_plots.R"
+# to "singularity_make_plots.R"
