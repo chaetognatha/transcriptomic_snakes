@@ -26,3 +26,36 @@ This pipeline requires that you are in a linux environment with conda and snakem
 
 All results are found in the 5_Results/ directory after running
 the pipeline.
+
+# Singularity
+First make sure you have singularity installed. If it isn't and you don't have super user access to your system
+you should use conda. When using singularity, images will override the conda environments, the idea is to avoid setting
+up the environments and just using the frozen environments in the images. This could potentially solve the dependency hell in
+the R-environment, which takes a long time on first run, when it is setting up the R + DESeq2 environment. So if you have singularity,
+here's a quick guide:
+
+### 1 Change settings in conf/config.yaml
+```
+make_plots: "make_plots.R"
+```
+Needs to be changed to:
+```
+make_plots: "singularity_make_plots.R"
+```
+In the config.yaml that sits in the conf/ directory.
+### 2 Run snakemake with use singularity
+```
+snakemake --cores 8 --use-singularity
+```
+Note that singularity overrides --use-conda!
+
+# Settings
+You find a file with different settings in conf/config.yaml, here you can specify paths to reference  genome, gff file
+and change trimmomatic settings depending on what you find in qc. It is recommended that when you run this pipeline the first time
+on your own dataset you start by specifying:
+```
+snakemake -R qc --cores 8 --use-conda
+```
+this command only produces FastQC reports for your reads, have a look at them and the default settings in the conf.yaml file to adjust appropriately.
+
+Then if you rerun, snakemake will know to skip rule qc and carry on with the rest of the analysis.
