@@ -59,8 +59,8 @@ rule mapping:
 	container:
 		"shub://chaetognatha/singularity_library:mapping"
 	shell:
-		'hisat2 -p 8 --max-intronlen 5000 -U {input[0]} -x "4_Mapped/genome" \
-		-S {output} --summary-file {output}.summary'
+		'hisat2 -p {threads} --max-intronlen 5000 -U {input[0]} -x "4_Mapped/genome" \
+		-S {output} --summary-file {output}.summary '
 
 rule count:
 	input:
@@ -74,7 +74,7 @@ rule count:
 	shell:
 		'htseq-count -s no -t CDS -i name -m intersection-nonempty {input} '
 		f"{gff_file} "
-		'| grep -v "^__" > {output}'
+		'| grep -v "^__" > {output} '
 
 rule count_matrix:
 	input:
@@ -108,4 +108,4 @@ rule get_plots:
 	log:
 		"logs/make_plots.log"
 	shell:
-		'Rscript {config[make_plots]} &> {log}'
+		'Rscript {config[make_plots]} &> {log} '
