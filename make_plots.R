@@ -38,7 +38,7 @@ rld <- rlogTransformation(dds, blind = T)
 #PCA plot
 pdf("fig1.pca.pdf")
 print(plotPCA(rld, intgroup = c("condition")))
-dev.off
+dev.off()
 #Heatmap of similarity between replicates
 #Distance matrix
 distsRL <- dist(t(assay(rld)))
