@@ -6,7 +6,6 @@ gff_file = config["gff_file"]
 
 rule all:
 	input:
-		expand('4_Mapped/{sample}.count', sample = SAMPLE),
 		expand('2_Quality/{sample}_fastqc.html', sample = SAMPLE),
 		"5_Results/fig1.pca.pdf",
 		"5_Results/fig2.heatmap.pdf",
