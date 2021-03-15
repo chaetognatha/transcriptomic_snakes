@@ -1,6 +1,15 @@
 # transcriptomic_snakes
 demo of a snakemake pipeline
 
+This workflow is based on an exercise in expression analysis. The workflow starts with single end reads, a reference genome .fna and an annotated genome .gff
+and goes through 4 main steps:
+* Quality Checking with FastQC
+* Mapping reads to reference 
+* Read count with Htseq-count
+* Differential expression and plotting with DeSeq2 in R
+
+This is a short version of the README which focuses on getting set up quickly, please read all of it before running the pipeline.
+
 ## Setup conda:
 https://docs.conda.io/en/latest/miniconda.html
 ## Setup snakemake:
