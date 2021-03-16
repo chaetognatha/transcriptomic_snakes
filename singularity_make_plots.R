@@ -6,6 +6,11 @@
 setwd("5_Results/")
 
 library(DESeq2) ; library(gplots) ; library(RColorBrewer)
+#parallelization
+library("BiocParallel")
+args = commandArgs(trailingOnly=TRUE)
+register(MulticoreParam(args[1]))
+#DESeq2
 
 count_mat <- as.matrix(read.csv("final.matrix", sep="\t", row.names = "gene_id"))
 head(count_mat)
