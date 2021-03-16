@@ -45,7 +45,7 @@ rule map_reference:
 	container:
 		"shub://chaetognatha/singularity_library:mapping"
 	shell:
-		'hisat2-build {ref_genome} "4_Mapped/genome" '
+		'hisat2-build -p {threads} {ref_genome} "4_Mapped/genome" '
 
 rule mapping:
 	input:
@@ -107,4 +107,4 @@ rule get_plots:
 	log:
 		"logs/make_plots.log"
 	shell:
-		'Rscript {config[make_plots]} &> {log} '
+		'Rscript {config[make_plots]} {threads} &> {log} '
