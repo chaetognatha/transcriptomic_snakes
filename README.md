@@ -58,6 +58,8 @@ snakemake --cores 8 --use-singularity
 ```
 Note that singularity overrides --use-conda!
 
+The singularity definition files can be found on: https://github.com/chaetognatha/singularity_library
+
 # Settings
 You find a file with different settings in conf/config.yaml, here you can specify paths to reference  genome, gff file
 and change trimmomatic settings depending on what you find in qc. It is recommended that when you run this pipeline the first time
